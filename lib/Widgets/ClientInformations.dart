@@ -33,7 +33,7 @@ class ClientInformations extends StatelessWidget {
                   alignment: Alignment.center,
                   width: double.infinity,
                   color: Colors.blue,
-                  child: Text("Informations",
+                  child: Text("Informations de domande",
                       style: GoogleFonts.abel(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -45,19 +45,19 @@ class ClientInformations extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text("Demande Categorie:"),
-                          Text(_controller.userName.value),
+                          Text("Demande Categorie:      "),
+                          Text(_controller.demandeCategorie.value),
                         ],
                       ),
                       Row(
                         children: [
-                          Text("Localité :"),
+                          Text("Localité :        "),
                           Text(_controller.demandeLocalite.value),
                         ],
                       ),
                       Row(
                         children: [
-                          Text("Destination:"),
+                          Text("Destination:        "),
                           Text(_controller.demandeDestination.value),
                         ],
                       ),
