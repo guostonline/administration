@@ -2,7 +2,8 @@ import 'package:administration/Logics/Demande.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
-  List<Demande> _demanad;
+
+  // Demande demanad;
   RxString userName = "".obs;
   RxString userEmailm = "".obs;
   RxString userPhone = "".obs;
@@ -20,7 +21,7 @@ class Controller extends GetxController {
   RxInt numberProduit = 0.obs;
   RxInt totlaPoids = 0.obs;
 
-  void setDemande(List<Demande> mylist) {
-    demandeCategorie.value= mylist[1].categorie;
+  void setDemande( Demande demande) {
+    demandeCategorie.value= demande.categorie;
   }
 }

@@ -1,6 +1,4 @@
-import 'dart:async';
 
-import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
@@ -9,8 +7,6 @@ import 'package:administration/Widgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/LesDemandesWidgtes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
@@ -22,14 +18,9 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<User> users;
   List<Demande> demandes;
-  StreamSubscription<QuerySnapshot> allUsers;
-  StreamSubscription<QuerySnapshot> allDemandes;
-  Controller _controller = Get.put(Controller());
   @override
   void initState() {
     super.initState();
-    allDemandes?.cancel();
-    allUsers?.cancel();
 
     getUserList().listen((QuerySnapshot snapshot) {
       final List<User> allusers =

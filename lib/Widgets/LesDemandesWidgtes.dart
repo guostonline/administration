@@ -1,5 +1,9 @@
+import 'package:administration/Logics/Controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+Controller _controller = Get.put(Controller());
 
 class DomandeWidget extends StatelessWidget {
   const DomandeWidget({Key key, @required this.demandesList}) : super(key: key);
@@ -42,7 +46,9 @@ class DomandeWidget extends StatelessWidget {
                         return Card(
                           elevation: 10,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              _controller.setDemande(demandesList[index]);
+                            },
                             child: ListTile(
                               leading: CircleAvatar(
                                 backgroundColor: Colors.redAccent,
