@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
@@ -6,6 +9,7 @@ import 'package:administration/Widgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/LesDemandesWidgtes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
@@ -13,6 +17,8 @@ class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
+
+Controller _controller = Get.put(Controller());
 
 class _MyAppState extends State<MyApp> {
   List<User> users;
@@ -24,10 +30,8 @@ class _MyAppState extends State<MyApp> {
     getUserList().listen((QuerySnapshot snapshot) {
       final List<User> allusers =
           snapshot.docs.map((e) => User.fromMap(e.data())).toList();
-
-      setState(() {
-        this.users = allusers;
-      });
+      _controller.myList.assignAll(allusers);
+      _controller.simpleList.assignAll(allusers);
     });
 
     getDemandesList().listen((QuerySnapshot snapshot) {
@@ -56,9 +60,7 @@ class _MyAppState extends State<MyApp> {
                   DomandeWidget(
                     demandesList: demandes,
                   ),
-                  ClientsWidget(
-                    clientsList: users,
-                  ),
+                  ClientsWidget(),
                 ],
               ),
               ClientInformations(),

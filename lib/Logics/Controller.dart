@@ -1,8 +1,11 @@
 import 'package:administration/Logics/Demande.dart';
+import 'package:administration/Logics/User.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
   // Demande demanad;
+  RxList simpleList = [].obs;
+  RxList myList = [].obs;
   RxString userName = "".obs;
   RxString userEmailm = "".obs;
   RxString userPhone = "".obs;
@@ -24,5 +27,9 @@ class Controller extends GetxController {
     demandeCategorie.value = demande.categorie;
     demandeLocalite.value = demande.localite;
     demandeDestination.value = demande.destination;
+  }
+
+  void filtredList(RxList mylist) {
+    simpleList = mylist;
   }
 }
