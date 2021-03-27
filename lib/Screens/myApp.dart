@@ -1,4 +1,3 @@
-import 'dart:js';
 
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
@@ -63,6 +62,7 @@ class _MyAppState extends State<MyApp> {
                   ClientsWidget(),
                 ],
               ),
+              SizedBox(height: 50),
               ClientInformations(),
             ],
           ),

@@ -18,15 +18,15 @@ class ClientInformations extends StatelessWidget {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(15), topRight: Radius.circular(15)),
         ),
-        elevation: 20,
+        elevation: 30,
         child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(15),
                     topRight: Radius.circular(15)),
                 border: Border.all(color: Colors.blue, width: 5)),
-            width: _width / 2,
-            height: _height / 4,
+            width: 500,
+            height: _height / 3,
             child: Column(
               children: [
                 Container(
@@ -41,32 +41,36 @@ class ClientInformations extends StatelessWidget {
                 ),
                 Flexible(
                   child: Container(
+                      padding: EdgeInsets.all(10),
                       child: Column(
-                    children: [
-                      Row(
                         children: [
-                          Text("Demande Categorie:      "),
-                          Text(_controller.demandeCategorie.value),
+                          myRow(
+                              "Categorie", _controller.demandeCategorie.value),
+                          myRow("Départ", _controller.demandeLocalite.value),
+                          myRow("Destination",
+                              _controller.demandeDestination.value),
+                          myRow("Date des le", _controller.demandeDesLe.value),
+                          myRow("Date Jusqua", _controller.demandeJusqua.value),
+                          myRow("Client", _controller.userName.value),
                         ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Localité :        "),
-                          Text(_controller.demandeLocalite.value),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Destination:        "),
-                          Text(_controller.demandeDestination.value),
-                        ],
-                      ),
-                    ],
-                  )),
+                      )),
                 ),
               ],
             )),
       ),
     );
   }
+}
+
+Widget myRow(String title, String text) {
+  return DefaultTextStyle(
+    style: GoogleFonts.robotoSlab(fontSize: 20),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(title),
+        Text(text),
+      ],
+    ),
+  );
 }
