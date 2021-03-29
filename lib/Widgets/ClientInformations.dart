@@ -1,4 +1,4 @@
-import 'package:administration/Logics/Controller.dart';
+ import 'package:administration/Logics/Controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -31,7 +31,7 @@ class ClientInformations extends StatelessWidget {
               children: [
                 Container(
                   alignment: Alignment.center,
-                  width: double.infinity,
+                 // width: double.infinity,
                   color: Colors.blue,
                   child: Text("Informations de domande",
                       style: GoogleFonts.abel(

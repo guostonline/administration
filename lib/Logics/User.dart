@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 class User {
+  String id;
   String name;
   String email;
   String numberPhone;
   String photoUrl;
   User({
+    this.id,
     this.name,
     this.email,
     this.numberPhone,
@@ -14,6 +16,7 @@ class User {
 
   Map<String, dynamic> toMap() {
     return {
+      "ID":id,
       'Nom et prenom': name,
       'Email': email,
       'Téléphone': numberPhone,
@@ -23,6 +26,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
+      id: map["ID"],
       name: map['Nom et prenom'],
       email: map['Email'],
       numberPhone: map['Téléphone'],

@@ -27,7 +27,7 @@ class ClientsWidget extends StatelessWidget {
             width: _width / 3,
             height: 400,
             child: Column(
-              children: [
+              children: [ 
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
@@ -39,6 +39,9 @@ class ClientsWidget extends StatelessWidget {
                           fontSize: 22)),
                 ),
                 TextField(
+                  decoration: InputDecoration(
+                    hintText: "Trouver un client.."
+                  ),
                   onChanged: (value) {
                     _controller.simpleList.assignAll(_controller.myList
                         .where((element) => element.name

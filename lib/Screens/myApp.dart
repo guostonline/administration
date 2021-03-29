@@ -4,6 +4,7 @@ import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Widgets/ClientInformations.dart';
+import 'package:administration/Widgets/DemandeCard2.dart';
 import 'package:administration/Widgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/LesDemandesWidgtes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -56,8 +57,8 @@ class _MyAppState extends State<MyApp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  DomandeWidget(
-                    demandesList: demandes,
+                  DemandeCard2(
+                    demande: demandes,
                   ),
                   ClientsWidget(),
                 ],

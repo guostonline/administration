@@ -1,98 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DemandeWidget extends StatelessWidget {
-  final String categorie;
-  final String localite;
-  final String destination;
-  final String deLe;
-  final String jusqua;
-  final bool charge;
-  final bool montage;
-  final bool emballage;
-  final bool facture;
-  final String userName;
-  final String email;
-  const DemandeWidget(
-      {Key key,
-      this.categorie,
-      this.localite,
-      this.destination,
-      this.deLe,
-      this.jusqua,
-      this.charge,
-      this.montage,
-      this.emballage,
-      this.facture,
-      this.userName,
-      this.email})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 400,
-      height: 200,
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomLeft,
-        colors: [
-          Colors.blue,
-          Colors.red,
-        ],
-      )),
-      child: Row(
-        //crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Column(
+Widget demandeCard(
+    {String categorie,
+    String localite,
+    String destination,
+    String deLe,
+    String jusqua,
+    bool charge,
+    bool montage,
+    bool emballage,
+    bool facture,
+    String userName,
+    String email}) {
+  return Container(
+    width: 400,
+    height: 200,
+    padding: EdgeInsets.all(15),
+    decoration: BoxDecoration(
+        gradient: LinearGradient(
+      begin: Alignment.topRight,
+      end: Alignment.bottomLeft,
+      colors: [
+        Colors.blue,
+        Colors.red,
+      ],
+    )),
+    child: Row(
+      //crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            CircleAvatar(
+              maxRadius: 20,
+              backgroundImage: AssetImage("images/demenagement.jpg"),
+            ),
+            VerticalDivider(),
+            CircleAvatar(
+              maxRadius: 20,
+              backgroundImage: AssetImage("images/user.png"),
+            ),
+          ],
+        ),
+        VerticalDivider(),
+        DefaultTextStyle(
+          style: GoogleFonts.robotoSlab(fontSize: 16, color: Colors.white),
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              CircleAvatar(
-                maxRadius: 20,
-                backgroundImage: AssetImage("images/demenagement.jpg"),
+              Text(categorie),
+              Divider(
+                color: Colors.white,
+                thickness: 5,
+                endIndent: 2,
+                indent: 10,
               ),
-              VerticalDivider(),
-              CircleAvatar(
-                maxRadius: 20,
-                backgroundImage: AssetImage("images/user.png"),
-              ),
+              myRow(localite, destination),
+              myRow(deLe, jusqua),
+              Divider(),
+              myOption(
+                  charge: charge,
+                  montage: montage,
+                  embalage: emballage,
+                  facture: facture),
+              userInformations(userName, email),
             ],
           ),
-          VerticalDivider(),
-          DefaultTextStyle(
-            style: GoogleFonts.robotoSlab(fontSize: 16, color: Colors.white),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(categorie),
-                Divider(
-                  color: Colors.white,
-                  thickness: 5,
-                  endIndent: 2,
-                  indent: 10,
-                ),
-                myRow(localite, destination),
-                myRow(deLe, jusqua),
-                Divider(),
-                myOption(
-                    charge: charge,
-                    montage: montage,
-                    embalage: emballage,
-                    facture: facture),
-                userInformation(userName, email),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+        )
+      ],
+    ),
+  );
 }
 
 Widget myRow(String title1, String title2) {
@@ -101,7 +83,6 @@ Widget myRow(String title1, String title2) {
     mainAxisSize: MainAxisSize.max,
     children: [
       Text(title1),
-     
       Text(title2),
     ],
   );
@@ -159,9 +140,9 @@ Widget myOption(
   );
 }
 
-Widget userInformation(String userName, String email) {
+Widget userInformations(String userName, String email) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [Text(userName), VerticalDivider(), Text(email)],
+    children: [Text(userName), Text(email)],
   );
 }

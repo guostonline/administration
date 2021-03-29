@@ -1,10 +1,12 @@
 import 'package:administration/Logics/Demande.dart';
+import 'package:administration/Logics/User.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
   // Demande demanad;
   RxList simpleList = [].obs;
   RxList myList = [].obs;
+  RxList userList = [].obs;
 
   RxString userName = "".obs;
   RxString userEmailm = "".obs;
@@ -40,9 +42,4 @@ class Controller extends GetxController {
     simpleList = mylist;
   }
 
-  filterUser(String userID){
-var test =myList.where((element) => 
-  element
-);
-  }
 }

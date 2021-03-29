@@ -1,7 +1,7 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Widgets/DemandeCard.dart';
-import 'package:administration/backup/Demande.dart';
+import 'package:administration/backup/Demande';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,7 +42,7 @@ class DomandeWidget extends StatelessWidget {
                               getOneUser(demandesList[index].user);
                               _controller.setDemande(demandesList[index]);
                             },
-                            child: DemandeWidget(
+                            child: demandeCard(
                               categorie: demandesList[index].categorie,
                               localite: demandesList[index].localite,
                               destination: demandesList[index].destination,
