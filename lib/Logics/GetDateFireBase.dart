@@ -1,5 +1,4 @@
 import 'package:administration/Logics/Controller.dart';
-import 'package:administration/Logics/User.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
@@ -20,19 +19,7 @@ Stream<QuerySnapshot> getUserList({int offset, int limit}) {
   return snapshots;
 }
 
-Future getOneUser(String userID) async {
 
-    var test = await users.doc(userID).get();
-    _controller.setUser(test.data());
-    //print(test.data());
-    return test.data()["Email"];
- 
-}
-Future getOneUserX(String userID) async {
-
-
-
-}
 
 
 Stream<QuerySnapshot> getDemandesList({int offset, int limit}) {

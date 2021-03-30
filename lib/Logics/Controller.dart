@@ -1,16 +1,23 @@
 import 'package:administration/Logics/Demande.dart';
-import 'package:administration/Logics/User.dart';
+import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:get/get.dart';
+
+import 'User.dart';
 
 class Controller extends GetxController {
   // Demande demanad;
   RxList simpleList = [].obs;
   RxList myList = [].obs;
+  RxList demandesFiltrie = [].obs;
+  RxList demandes = [].obs;
   RxList userList = [].obs;
+  List<Demande> oneDemand = [];
 
+  String userId = "";
   RxString userName = "".obs;
-  RxString userEmailm = "".obs;
+  RxString userEmail = "".obs;
   RxString userPhone = "".obs;
+  RxString userPhotoUrl = "".obs;
   RxString demandeCategorie = "".obs;
   RxString demandeLocalite = "".obs;
   RxString demandeDestination = "".obs;
@@ -25,21 +32,18 @@ class Controller extends GetxController {
   RxInt numberProduit = 0.obs;
   RxInt totlaPoids = 0.obs;
 
+  RxBool isVisible = false.obs;
+
   void setDemande(Demande mydemandeList) {
     demandeCategorie.value = mydemandeList.categorie;
     demandeLocalite.value = mydemandeList.localite;
     demandeDestination.value = mydemandeList.destination;
     demandeDesLe.value = mydemandeList.desLe;
     demandeJusqua.value = mydemandeList.jusqua;
+    userId = mydemandeList.user;
+    userName.value = findUser(userId).name;
+    userEmail.value = findUser(userId).email;
+    userPhone.value = findUser(userId).numberPhone;
+    userPhotoUrl.value = findUser(userId).photoUrl;
   }
-
-  setUser(oneUser) {
-    if (oneUser["Nom et prenom"] == null) userName.value = "no user";
-    userName.value = oneUser["Nom et prenom"];
-  }
-
-  void filtredList(RxList mylist) {
-    simpleList = mylist;
-  }
-
 }

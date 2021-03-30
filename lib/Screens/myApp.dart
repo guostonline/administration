@@ -1,12 +1,13 @@
+import 'dart:ui';
 
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
+import 'package:administration/Screens/AddDemand.dart';
 import 'package:administration/Widgets/ClientInformations.dart';
-import 'package:administration/Widgets/DemandeCard2.dart';
+import 'package:administration/Widgets/DemandeCard.dart';
 import 'package:administration/Widgets/LesClientsWidgets.dart';
-import 'package:administration/Widgets/LesDemandesWidgtes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,15 +38,14 @@ class _MyAppState extends State<MyApp> {
     getDemandesList().listen((QuerySnapshot snapshot) {
       final List<Demande> alldemandes =
           snapshot.docs.map((e) => Demande.fromMap(e.data())).toList();
-
-      setState(() {
-        this.demandes = alldemandes;
-      });
+      _controller.demandes.assignAll(alldemandes);
+      _controller.demandesFiltrie.assignAll(alldemandes);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    var _height = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -57,17 +57,22 @@ class _MyAppState extends State<MyApp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  DemandeCard2(
-                    demande: demandes,
-                  ),
-                  ClientsWidget(),
+                 
+                  DemandeCard(),
+                   DemandInformations(),
                 ],
               ),
               SizedBox(height: 50),
-              ClientInformations(),
+              ClientsWidget()
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(AddDemand());
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

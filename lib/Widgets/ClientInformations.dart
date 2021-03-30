@@ -1,62 +1,101 @@
- import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/Demande.dart';
+import 'package:administration/Logics/FilterFunctions.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Controller _controller = Get.put(Controller());
 
-class ClientInformations extends StatelessWidget {
-  const ClientInformations({Key key}) : super(key: key);
+class DemandInformations extends StatelessWidget {
+  final List<Demande> demande;
+  final bool isVisible;
+  const DemandInformations({Key key, this.demande, this.isVisible})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _width = MediaQuery.of(context).size.width;
     var _height = MediaQuery.of(context).size.height;
     return Obx(
-      () => Card(
-        shape: BeveledRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(15), topRight: Radius.circular(15)),
+      () => Visibility(
+        visible: _controller.isVisible.value,
+        child: Card(
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(15), topRight: Radius.circular(15)),
+          ),
+          elevation: 30,
+          child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                  border: Border.all(color: Colors.blue, width: 5)),
+              width: 400,
+              height: 400,
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    // width: double.infinity,
+                    color: Colors.blue,
+                    child: Text("Informations de domande",
+                        style: GoogleFonts.abel(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 22)),
+                  ),
+                  Flexible(
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(_controller.demandeCategorie.value,
+                                    style: GoogleFonts.robotoSlab(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold)),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: AssetImage(
+                                      selectCategorieImage(
+                                          _controller.demandeCategorie.value)),
+                                ),
+                              ],
+                            ),
+                            myRow("Départ", _controller.demandeLocalite.value),
+                            myRow("Destination",
+                                _controller.demandeDestination.value),
+                            myRow(
+                                "Date des le", _controller.demandeDesLe.value),
+                            myRow(
+                                "Date Jusqua", _controller.demandeJusqua.value),
+                            Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AutoSizeText(_controller.userName.value,
+                                    minFontSize: 20,
+                                    style: GoogleFonts.robotoSlab(
+                                        fontWeight: FontWeight.bold)),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                      _controller.userPhotoUrl.value),
+                                ),
+                              ],
+                            ),
+                            myRow("Email", _controller.userEmail.value),
+                            myRow("Téléphone", _controller.userPhone.value)
+                          ],
+                        )),
+                  ),
+                ],
+              )),
         ),
-        elevation: 30,
-        child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
-                border: Border.all(color: Colors.blue, width: 5)),
-            width: 500,
-            height: _height / 3,
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                 // width: double.infinity,
-                  color: Colors.blue,
-                  child: Text("Informations de domande",
-                      style: GoogleFonts.abel(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 22)),
-                ),
-                Flexible(
-                  child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          myRow(
-                              "Categorie", _controller.demandeCategorie.value),
-                          myRow("Départ", _controller.demandeLocalite.value),
-                          myRow("Destination",
-                              _controller.demandeDestination.value),
-                          myRow("Date des le", _controller.demandeDesLe.value),
-                          myRow("Date Jusqua", _controller.demandeJusqua.value),
-                          myRow("Client", _controller.userName.value),
-                        ],
-                      )),
-                ),
-              ],
-            )),
       ),
     );
   }
@@ -64,7 +103,7 @@ class ClientInformations extends StatelessWidget {
 
 Widget myRow(String title, String text) {
   return DefaultTextStyle(
-    style: GoogleFonts.robotoSlab(fontSize: 20),
+    style: GoogleFonts.robotoSlab(fontSize: 16),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

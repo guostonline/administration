@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 Controller _controller = Get.put(Controller());
 
 class ClientsWidget extends StatelessWidget {
-  const ClientsWidget({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
@@ -27,7 +25,7 @@ class ClientsWidget extends StatelessWidget {
             width: _width / 3,
             height: 400,
             child: Column(
-              children: [ 
+              children: [
                 Container(
                   alignment: Alignment.center,
                   width: double.infinity,
@@ -39,9 +37,7 @@ class ClientsWidget extends StatelessWidget {
                           fontSize: 22)),
                 ),
                 TextField(
-                  decoration: InputDecoration(
-                    hintText: "Trouver un client.."
-                  ),
+                  decoration: InputDecoration(hintText: "Trouver un client.."),
                   onChanged: (value) {
                     _controller.simpleList.assignAll(_controller.myList
                         .where((element) => element.name

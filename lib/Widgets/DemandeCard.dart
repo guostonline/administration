@@ -1,148 +1,159 @@
+import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/Demande.dart';
+import 'package:administration/Logics/FilterFunctions.dart';
+import 'package:get/get.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget demandeCard(
-    {String categorie,
-    String localite,
-    String destination,
-    String deLe,
-    String jusqua,
-    bool charge,
-    bool montage,
-    bool emballage,
-    bool facture,
-    String userName,
-    String email}) {
-  return Container(
-    width: 400,
-    height: 200,
-    padding: EdgeInsets.all(15),
-    decoration: BoxDecoration(
-        gradient: LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        Colors.blue,
-        Colors.red,
-      ],
-    )),
-    child: Row(
-      //crossAxisAlignment: CrossAxisAlignment.stretch,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: AssetImage("images/demenagement.jpg"),
-            ),
-            VerticalDivider(),
-            CircleAvatar(
-              maxRadius: 20,
-              backgroundImage: AssetImage("images/user.png"),
-            ),
-          ],
-        ),
-        VerticalDivider(),
-        DefaultTextStyle(
-          style: GoogleFonts.robotoSlab(fontSize: 16, color: Colors.white),
+Controller _controller = Get.put(Controller());
+
+class DemandeCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      width: 500,
+      height: 650,
+      child: Card(
+        margin: EdgeInsets.all(5),
+        elevation: 20,
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
             children: [
-              Text(categorie),
-              Divider(
-                color: Colors.white,
-                thickness: 5,
-                endIndent: 2,
-                indent: 10,
+              Text("Les demandes", style: GoogleFonts.robotoSlab(fontSize: 25)),
+              TextField(
+                onChanged: (value) {
+                  _controller.demandesFiltrie.assignAll(_controller.demandes
+                      .where((element) => element.localite
+                          .toLowerCase()
+                          .contains(value.toLowerCase()))
+                      .toList());
+                },
+                decoration:
+                    InputDecoration(hintText: "Rechercher dans les demande.."),
               ),
-              myRow(localite, destination),
-              myRow(deLe, jusqua),
-              Divider(),
-              myOption(
-                  charge: charge,
-                  montage: montage,
-                  embalage: emballage,
-                  facture: facture),
-              userInformations(userName, email),
+              Obx(
+                () => Container(
+                  height: 600,
+                  child: ListView.builder(
+                    itemCount: _controller.demandesFiltrie.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        elevation: 10,
+                        margin: EdgeInsets.all(15),
+                        child: ListTile(
+                          isThreeLine: true,
+                          onTap: () {
+                            //_controller.setDemande(demande[index]);
+                            _controller.isVisible.value = true;
+                            _controller
+                                .setDemande(_controller.demandesFiltrie[index]);
+                            _controller.userName.value = findUser(
+                                    _controller.demandesFiltrie[index].user)
+                                .name;
+                          },
+                          trailing: threeDot(
+                              vue: _controller.demandesFiltrie[index].vue,
+                              valide:
+                                  _controller.demandesFiltrie[index].valider,
+                              devis:
+                                  _controller.demandesFiltrie[index].repondu),
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(findUser(
+                                    _controller.demandesFiltrie[index].user)
+                                .photoUrl),
+                          ),
+                          title: Text(
+                              _controller.demandesFiltrie[index].categorie,
+                              style: GoogleFonts.robotoSlab(fontSize: 15)),
+                          dense: true,
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(_controller
+                                      .demandesFiltrie[index].localite),
+                                  Flexible(child: Divider(color: Colors.black)),
+                                  Text(">"),
+                                  Text(_controller
+                                      .demandesFiltrie[index].destination),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      _controller.demandesFiltrie[index].desLe),
+                                  Text("<"),
+                                  Flexible(child: Divider(color: Colors.black)),
+                                  Text(">"),
+                                  Text(_controller
+                                      .demandesFiltrie[index].jusqua),
+                                ],
+                              ),
+                              Divider(),
+                              DefaultTextStyle(
+                                style: GoogleFonts.robotoSlab(fontSize: 14),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("Client : " +
+                                        findUser(_controller
+                                                .demandesFiltrie[index].user)
+                                            .name),
+                                    VerticalDivider(
+                                      color: Colors.black,
+                                    ),
+                                    Text("Email : " +
+                                        findUser(_controller
+                                                .demandesFiltrie[index].user)
+                                            .email),
+                                    VerticalDivider(
+                                      color: Colors.black,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
-        )
-      ],
-    ),
-  );
+        ),
+      ),
+    );
+  }
 }
 
-Widget myRow(String title1, String title2) {
-  return Row(
+Widget threeDot({bool vue, bool valide, bool devis}) {
+  return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    mainAxisSize: MainAxisSize.max,
     children: [
-      Text(title1),
-      Text(title2),
+      CircleAvatar(
+        maxRadius: 6,
+        backgroundColor: vue ? Colors.green : Colors.grey,
+      ),
+      CircleAvatar(
+        maxRadius: 6,
+        backgroundColor: valide ? Colors.green : Colors.grey,
+      ),
+      CircleAvatar(
+        maxRadius: 6,
+        backgroundColor: devis ? Colors.green : Colors.grey,
+      ),
     ],
-  );
-}
-
-Widget myOption(
-    {bool charge = false,
-    bool montage = false,
-    bool embalage = false,
-    bool facture = false}) {
-  return DefaultTextStyle(
-    style: GoogleFonts.robotoSlab(fontSize: 12, color: Colors.white),
-    child: Row(
-      children: [
-        Column(
-          children: [
-            Text("Charge-Décharge"),
-            charge
-                ? Icon(Icons.circle, color: Colors.green)
-                : Icon(Icons.circle, color: Colors.grey),
-          ],
-        ),
-        VerticalDivider(
-          color: Colors.white,
-        ),
-        Column(
-          children: [
-            Text("Montage-Démontage"),
-            montage
-                ? Icon(Icons.circle, color: Colors.green)
-                : Icon(Icons.circle, color: Colors.grey),
-          ],
-        ),
-        VerticalDivider(),
-        Column(
-          children: [
-            Text("Besoin d'emballage"),
-            embalage
-                ? Icon(Icons.circle, color: Colors.green)
-                : Icon(Icons.circle, color: Colors.grey),
-          ],
-        ),
-        VerticalDivider(),
-        Column(
-          children: [
-            Text("Facture"),
-            facture
-                ? Icon(Icons.circle, color: Colors.green)
-                : Icon(Icons.circle, color: Colors.grey),
-          ],
-        ),
-        VerticalDivider(),
-      ],
-    ),
-  );
-}
-
-Widget userInformations(String userName, String email) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [Text(userName), Text(email)],
   );
 }
