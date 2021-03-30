@@ -1,8 +1,4 @@
-import 'package:administration/Logics/Controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
-
-Controller _controller = Get.put(Controller());
 CollectionReference users = FirebaseFirestore.instance.collection('Users');
 CollectionReference demandes =
     FirebaseFirestore.instance.collection('Demandes');

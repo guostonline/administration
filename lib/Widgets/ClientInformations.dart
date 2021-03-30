@@ -33,7 +33,7 @@ class DemandInformations extends StatelessWidget {
                       topRight: Radius.circular(15)),
                   border: Border.all(color: Colors.blue, width: 5)),
               width: 400,
-              height: 400,
+              height: 460,
               child: Column(
                 children: [
                   Container(
@@ -89,7 +89,17 @@ class DemandInformations extends StatelessWidget {
                               ],
                             ),
                             myRow("Email", _controller.userEmail.value),
-                            myRow("Téléphone", _controller.userPhone.value)
+                            myRow("Téléphone", _controller.userPhone.value),
+                            SizedBox(height: 15),
+                            Divider(),
+                            myRowIcon("Charge-Décharge",
+                                _controller.demandeChargeDecharge.value),
+                            myRowIcon("Montage-Démontage",
+                                _controller.demandeCMontageDemontage.value),
+                            myRowIcon("Besoin d'emballage",
+                                _controller.demandeBesoinEmbalage.value),
+                            myRowIcon("Avec Facture",
+                                _controller.demandeAvecFacture.value),
                           ],
                         )),
                   ),
@@ -101,14 +111,27 @@ class DemandInformations extends StatelessWidget {
   }
 }
 
-Widget myRow(String title, String text) {
+Widget myRow(String title, String text, {bool isSmall = false}) {
   return DefaultTextStyle(
-    style: GoogleFonts.robotoSlab(fontSize: 16),
+    style: GoogleFonts.robotoSlab(fontSize: isSmall ? 12 : 16),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title),
         Text(text),
+      ],
+    ),
+  );
+}
+
+/// this my widget to `make` text with icons
+Widget myRowIcon(String title, bool ok) {
+  return DefaultTextStyle(
+    style: GoogleFonts.robotoSlab(fontSize: 12),
+    child: Row(
+      children: [
+        Icon(ok ? Icons.done : null),
+        Text(title),
       ],
     ),
   );

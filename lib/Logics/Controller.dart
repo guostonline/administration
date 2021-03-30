@@ -2,8 +2,6 @@ import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:get/get.dart';
 
-import 'User.dart';
-
 class Controller extends GetxController {
   // Demande demanad;
   RxList simpleList = [].obs;
@@ -11,6 +9,7 @@ class Controller extends GetxController {
   RxList demandesFiltrie = [].obs;
   RxList demandes = [].obs;
   RxList userList = [].obs;
+  RxList demandeList = [].obs;
   List<Demande> oneDemand = [];
 
   String userId = "";
@@ -31,7 +30,10 @@ class Controller extends GetxController {
   RxInt numberSalon = 0.obs;
   RxInt numberProduit = 0.obs;
   RxInt totlaPoids = 0.obs;
-
+//Switcher
+  RxBool searchChargeDecharge = false.obs;
+  RxBool searchMontageDemontage = false.obs;
+  RxBool searchBesoinEmbalage = false.obs;
   RxBool isVisible = false.obs;
 
   void setDemande(Demande mydemandeList) {
@@ -45,5 +47,9 @@ class Controller extends GetxController {
     userEmail.value = findUser(userId).email;
     userPhone.value = findUser(userId).numberPhone;
     userPhotoUrl.value = findUser(userId).photoUrl;
+    demandeChargeDecharge.value = mydemandeList.chargeDecharge;
+    demandeCMontageDemontage.value = mydemandeList.montageDemontage;
+    demandeBesoinEmbalage.value = mydemandeList.besoiEmballage;
+    demandeAvecFacture.value = mydemandeList.demnadeDeFacture;
   }
 }
