@@ -92,14 +92,54 @@ class DemandInformations extends StatelessWidget {
                             myRow("Téléphone", _controller.userPhone.value),
                             SizedBox(height: 15),
                             Divider(),
-                            myRowIcon("Charge-Décharge",
-                                _controller.demandeChargeDecharge.value),
-                            myRowIcon("Montage-Démontage",
-                                _controller.demandeCMontageDemontage.value),
-                            myRowIcon("Besoin d'emballage",
-                                _controller.demandeBesoinEmbalage.value),
-                            myRowIcon("Avec Facture",
-                                _controller.demandeAvecFacture.value),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    myRowIcon(
+                                        "Charge-Décharge",
+                                        _controller
+                                            .demandeChargeDecharge.value),
+                                    myRowIcon(
+                                        "Montage-Démontage",
+                                        _controller
+                                            .demandeCMontageDemontage.value),
+                                    myRowIcon(
+                                        "Besoin d'emballage",
+                                        _controller
+                                            .demandeBesoinEmbalage.value),
+                                    myRowIcon("Avec Facture",
+                                        _controller.demandeAvecFacture.value),
+                                  ],
+                                ),
+                                VerticalDivider(
+                                  color: Colors.black,
+                                  thickness: 20,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    myRow(
+                                        "Nomber Salons",
+                                        _controller.numberSalon.value
+                                            .toString(),
+                                        isSmall: true),
+                                    myRow(
+                                        "Nomber Produits",
+                                        _controller.numberProduit.value
+                                            .toString(),
+                                        isSmall: true),
+                                    myRow("Total Poids",
+                                        _controller.totlaPoids.value.toString(),
+                                        isSmall: true),
+                                  ],
+                                )
+                              ],
+                            )
                           ],
                         )),
                   ),
@@ -115,9 +155,9 @@ Widget myRow(String title, String text, {bool isSmall = false}) {
   return DefaultTextStyle(
     style: GoogleFonts.robotoSlab(fontSize: isSmall ? 12 : 16),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title),
+        SizedBox(width: 20),
         Text(text),
       ],
     ),
@@ -130,7 +170,10 @@ Widget myRowIcon(String title, bool ok) {
     style: GoogleFonts.robotoSlab(fontSize: 12),
     child: Row(
       children: [
-        Icon(ok ? Icons.done : null),
+        Icon(
+          ok ? Icons.done : null,
+          color: Colors.green,
+        ),
         Text(title),
       ],
     ),

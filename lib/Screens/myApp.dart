@@ -1,5 +1,3 @@
-
-
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
@@ -40,14 +38,11 @@ class _MyAppState extends State<MyApp> {
           snapshot.docs.map((e) => Demande.fromMap(e.data())).toList();
       _controller.demandes.assignAll(alldemandes);
       _controller.demandesFiltrie.assignAll(alldemandes);
-      
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -59,13 +54,12 @@ class _MyAppState extends State<MyApp> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                 
                   DemandeCard(),
-                   DemandInformations(),
+                  DemandInformations(),
                 ],
               ),
               SizedBox(height: 50),
-              ClientsWidget()
+              // ClientsWidget()
             ],
           ),
         ),

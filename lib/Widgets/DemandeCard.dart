@@ -16,7 +16,7 @@ class DemandeCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15),
       width: 500,
-      height: 550,
+      height: 700,
       child: Obx(
         () => Card(
           margin: EdgeInsets.all(5),
@@ -26,28 +26,52 @@ class DemandeCard extends StatelessWidget {
             children: [
               Text("Les demandes", style: GoogleFonts.robotoSlab(fontSize: 25)),
               TextField(
-                onChanged: (value) {
-                  _controller.demandesFiltrie.assignAll(_controller.demandes
-                      .where((element) =>
-                          element.localite
-                              .toLowerCase()
-                              .contains(value.toLowerCase()) ||
-                          element.destination
-                              .toLowerCase()
-                              .contains(value.toLowerCase()) ||
-                          element.desLe
-                              .toLowerCase()
-                              .contains(value.toLowerCase()) ||
-                          element.jusqua
-                              .toLowerCase()
-                              .contains(value.toLowerCase()))
-                      .toList());
-                },
-                decoration:
-                    InputDecoration(hintText: "Rechercher dans les demande.."),
+                  onChanged: (value) {
+                    _controller.demandesFiltrie.assignAll(_controller.demandes
+                        .where((element) =>
+                            element.localite
+                                .toLowerCase()
+                                .contains(value.toLowerCase()) ||
+                            element.destination
+                                .toLowerCase()
+                                .contains(value.toLowerCase()) ||
+                            element.desLe
+                                .toLowerCase()
+                                .contains(value.toLowerCase()) ||
+                            element.jusqua
+                                .toLowerCase()
+                                .contains(value.toLowerCase()))
+                        .toList());
+                  },
+                  decoration: InputDecoration(
+                      hintText: "Rechercher dans les demandes..")),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Row(
+                  children: [
+                    Text("Demandes Validees"),
+                    FlutterSwitch(
+                      height: 25,
+                      width: 50,
+                      value: _controller.searchChargeDecharge.value,
+                      onToggle: (value) {
+                        _controller.searchChargeDecharge.value = value;
+                        print("switch $value");
+                        if (value) {
+                          _controller.demandesFiltrie.assignAll(_controller
+                              .demandes
+                              .where((element) => element.valider == true)
+                              .toList());
+                        } else
+                          _controller.demandesFiltrie
+                              .assignAll(_controller.demandes);
+                      },
+                    ),
+                  ],
+                ),
               ),
               Container(
-                height: 350,
+                height: 500,
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: _controller.demandesFiltrie.length,
@@ -136,17 +160,6 @@ class DemandeCard extends StatelessWidget {
                   },
                 ),
               ),
-              Row(
-                children: [
-                  FlutterSwitch(
-                    inactiveText: "Charge-Decharge",
-                    value: _controller.searchChargeDecharge.value,
-                    onToggle: (value) {
-                      _controller.searchChargeDecharge.value = value;
-                    },
-                  ),
-                ],
-              )
             ],
           ),
         ),
