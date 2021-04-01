@@ -118,25 +118,30 @@ class DemandInformations extends StatelessWidget {
                                   color: Colors.black,
                                   thickness: 20,
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    myRow(
-                                        "Nomber Salons",
-                                        _controller.numberSalon.value
-                                            .toString(),
-                                        isSmall: true),
-                                    myRow(
-                                        "Nomber Produits",
-                                        _controller.numberProduit.value
-                                            .toString(),
-                                        isSmall: true),
-                                    myRow("Total Poids",
-                                        _controller.totlaPoids.value.toString(),
-                                        isSmall: true),
-                                  ],
+                                Flexible(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      myRow(
+                                          "Nomber Salons",
+                                          _controller.numberSalon.value
+                                              .toString(),
+                                          isSmall: true),
+                                      myRow(
+                                          "Nomber Produits",
+                                          _controller.numberProduit.value
+                                              .toString(),
+                                          isSmall: true),
+                                      myRow(
+                                          "Total Poids",
+                                          _controller.totlaPoids.value
+                                              .toString(),
+                                          isSmall: true),
+                                    ],
+                                  ),
                                 )
                               ],
                             )
@@ -155,9 +160,10 @@ Widget myRow(String title, String text, {bool isSmall = false}) {
   return DefaultTextStyle(
     style: GoogleFonts.robotoSlab(fontSize: isSmall ? 12 : 16),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(title),
-        SizedBox(width: 20),
         Text(text),
       ],
     ),
@@ -169,6 +175,7 @@ Widget myRowIcon(String title, bool ok) {
   return DefaultTextStyle(
     style: GoogleFonts.robotoSlab(fontSize: 12),
     child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Icon(
           ok ? Icons.done : null,

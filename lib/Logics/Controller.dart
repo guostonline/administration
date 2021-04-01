@@ -31,9 +31,11 @@ class Controller extends GetxController {
   RxInt numberProduit = 0.obs;
   RxInt totlaPoids = 0.obs;
 //Switcher
-  RxBool searchChargeDecharge = false.obs;
-  RxBool searchMontageDemontage = false.obs;
-  RxBool searchBesoinEmbalage = false.obs;
+  RxBool filterValidees = false.obs;
+  RxBool filterOnAttends = false.obs;
+  RxBool filterRefusees = false.obs;
+  RxBool filterDejaVue = false.obs;
+
   RxBool isVisible = false.obs;
 
   void setDemande(Demande mydemandeList) {

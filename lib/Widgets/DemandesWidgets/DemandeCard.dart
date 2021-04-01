@@ -2,6 +2,8 @@ import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:administration/Widgets/ClientInformations.dart';
+import 'package:administration/Widgets/DemandesWidgets/FilterDemandOption.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -15,8 +17,8 @@ class DemandeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(15),
-      width: 500,
-      height: 700,
+      width: 440,
+      height: 730,
       child: Obx(
         () => Card(
           margin: EdgeInsets.all(5),
@@ -24,7 +26,11 @@ class DemandeCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Les demandes", style: GoogleFonts.robotoSlab(fontSize: 25)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Les demandes",
+                    style: GoogleFonts.robotoSlab(fontSize: 25)),
+              ),
               TextField(
                   onChanged: (value) {
                     _controller.demandesFiltrie.assignAll(_controller.demandes
@@ -45,31 +51,7 @@ class DemandeCard extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: "Rechercher dans les demandes..")),
-              Padding(
-                padding: const EdgeInsets.all(18.0),
-                child: Row(
-                  children: [
-                    Text("Demandes Validees"),
-                    FlutterSwitch(
-                      height: 25,
-                      width: 50,
-                      value: _controller.searchChargeDecharge.value,
-                      onToggle: (value) {
-                        _controller.searchChargeDecharge.value = value;
-                        print("switch $value");
-                        if (value) {
-                          _controller.demandesFiltrie.assignAll(_controller
-                              .demandes
-                              .where((element) => element.valider == true)
-                              .toList());
-                        } else
-                          _controller.demandesFiltrie
-                              .assignAll(_controller.demandes);
-                      },
-                    ),
-                  ],
-                ),
-              ),
+              FilterDemandeOptions(),
               Container(
                 height: 500,
                 child: ListView.builder(
@@ -94,7 +76,7 @@ class DemandeCard extends StatelessWidget {
                         trailing: threeDot(
                             vue: _controller.demandesFiltrie[index].vue,
                             valide: _controller.demandesFiltrie[index].valider,
-                            devis: _controller.demandesFiltrie[index].repondu),
+                            refus: _controller.demandesFiltrie[index].refus),
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(
                               findUser(_controller.demandesFiltrie[index].user)
@@ -136,17 +118,16 @@ class DemandeCard extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("Client : " +
-                                      findUser(_controller
-                                              .demandesFiltrie[index].user)
-                                          .name),
+                                  AutoSizeText(
+                                    "Demande par : " +
+                                        findUser(_controller
+                                                .demandesFiltrie[index].user)
+                                            .name,
+                                    maxLines: 1,
+                                  ),
                                   VerticalDivider(
                                     color: Colors.black,
                                   ),
-                                  Text("Email : " +
-                                      findUser(_controller
-                                              .demandesFiltrie[index].user)
-                                          .email),
                                   VerticalDivider(
                                     color: Colors.black,
                                   ),
@@ -160,6 +141,37 @@ class DemandeCard extends StatelessWidget {
                   },
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      maxRadius: 6,
+                      backgroundColor: Colors.green,
+                    ),
+                    Text('  Déja Vue'),
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      maxRadius: 6,
+                      backgroundColor: Colors.blue,
+                    ),
+                    Text('  Valider'),
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      maxRadius: 6,
+                      backgroundColor: Colors.red,
+                    ),
+                    Text('  Refuser'),
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      maxRadius: 6,
+                      backgroundColor: Colors.deepPurple,
+                    ),
+                    Text('  Attente'),
+                    SizedBox(width: 10),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -168,7 +180,7 @@ class DemandeCard extends StatelessWidget {
   }
 }
 
-Widget threeDot({bool vue, bool valide, bool devis}) {
+Widget threeDot({bool vue, bool valide, bool refus}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -178,11 +190,11 @@ Widget threeDot({bool vue, bool valide, bool devis}) {
       ),
       CircleAvatar(
         maxRadius: 6,
-        backgroundColor: valide ? Colors.green : Colors.grey,
+        backgroundColor: valide ? Colors.blue : Colors.grey,
       ),
       CircleAvatar(
         maxRadius: 6,
-        backgroundColor: devis ? Colors.green : Colors.grey,
+        backgroundColor: refus ? Colors.red : Colors.grey,
       ),
     ],
   );

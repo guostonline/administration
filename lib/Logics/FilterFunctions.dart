@@ -1,4 +1,5 @@
 import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/Demande.dart';
 import 'package:get/get.dart';
 
 import 'User.dart';
@@ -30,6 +31,49 @@ String selectCategorieImage(String categorie) {
       break;
 
     default:
-    return "images/demenagement.jpg";
+      return "images/demenagement.jpg";
   }
+}
+
+filterByValide(bool option) {
+  if (option)
+    _controller.demandesFiltrie.assignAll(_controller.demandes
+        .where((demande) => demande.valider == true)
+        .toList());
+  else
+    _controller.demandesFiltrie.assignAll(_controller.demandes);
+}
+
+filterByVue(bool option) {
+  if (option)
+    _controller.demandesFiltrie.assignAll(
+        _controller.demandes.where((demande) => demande.vue == true).toList());
+  else
+    _controller.demandesFiltrie.assignAll(_controller.demandes);
+}
+
+filterByRefus(bool option) {
+  if (option)
+    _controller.demandesFiltrie.assignAll(_controller.demandes
+        .where((demande) => demande.refus == true)
+        .toList());
+  else
+    _controller.demandesFiltrie.assignAll(_controller.demandes);
+}
+
+filterByAttend(bool option) {
+  if (option)
+    _controller.demandesFiltrie.assignAll(_controller.demandes
+        .where((demande) => demande.repondu == true)
+        .toList());
+  else
+    _controller.demandesFiltrie.assignAll(_controller.demandes);
+}
+
+resetAllSwitcher() {
+  _controller.filterDejaVue.value = false;
+  _controller.filterOnAttends.value = false;
+  _controller.filterRefusees.value = false;
+  _controller.filterValidees.value = false;
+
 }

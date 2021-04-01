@@ -4,7 +4,7 @@ import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Screens/AddDemand.dart';
 import 'package:administration/Widgets/ClientInformations.dart';
-import 'package:administration/Widgets/DemandeCard.dart';
+import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
 import 'package:administration/Widgets/LesClientsWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +44,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          MaterialButton(
+              child: Text(
+                "Clients",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => Get.to(ClientsWidget())),
+          MaterialButton(
+              child: Text(
+                "Demandes",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => Get.to(MyApp()))
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(

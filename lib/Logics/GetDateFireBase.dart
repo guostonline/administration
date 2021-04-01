@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 CollectionReference users = FirebaseFirestore.instance.collection('Users');
 CollectionReference demandes =
     FirebaseFirestore.instance.collection('Demandes');
@@ -14,9 +15,6 @@ Stream<QuerySnapshot> getUserList({int offset, int limit}) {
   }
   return snapshots;
 }
-
-
-
 
 Stream<QuerySnapshot> getDemandesList({int offset, int limit}) {
   Stream<QuerySnapshot> snapshots = demandes.snapshots();
