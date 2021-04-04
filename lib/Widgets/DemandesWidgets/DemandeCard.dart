@@ -1,7 +1,7 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
-import 'package:administration/Widgets/ClientInformations.dart';
+import 'package:administration/Widgets/InformationWidget/ClientInformations.dart';
 import 'package:administration/Widgets/DemandesWidgets/FilterDemandOption.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
@@ -46,7 +46,9 @@ class DemandeCard extends StatelessWidget {
                                 .contains(value.toLowerCase()) ||
                             element.jusqua
                                 .toLowerCase()
-                                .contains(value.toLowerCase()))
+                                .contains(value.toLowerCase())
+                                )
+                                
                         .toList());
                   },
                   decoration: InputDecoration(
@@ -73,10 +75,16 @@ class DemandeCard extends StatelessWidget {
                               findUser(_controller.demandesFiltrie[index].user)
                                   .name;
                         },
-                        trailing: threeDot(
-                            vue: _controller.demandesFiltrie[index].vue,
-                            valide: _controller.demandesFiltrie[index].valider,
-                            refus: _controller.demandesFiltrie[index].refus),
+                        trailing: CircleAvatar(
+                          radius: 10,
+                          backgroundColor: statCircle(
+                              vue: _controller.demandesFiltrie[index].vue,
+                              valider:
+                                  _controller.demandesFiltrie[index].valider,
+                              attent:
+                                  _controller.demandesFiltrie[index].repondu,
+                              refus: _controller.demandesFiltrie[index].refus),
+                        ),
                         leading: CircleAvatar(
                           backgroundImage: NetworkImage(
                               findUser(_controller.demandesFiltrie[index].user)
@@ -180,7 +188,7 @@ class DemandeCard extends StatelessWidget {
   }
 }
 
-Widget threeDot({bool vue, bool valide, bool refus}) {
+Widget threeDot({bool vue, bool valide, bool refus, bool attent}) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -195,6 +203,10 @@ Widget threeDot({bool vue, bool valide, bool refus}) {
       CircleAvatar(
         maxRadius: 6,
         backgroundColor: refus ? Colors.red : Colors.grey,
+      ),
+      CircleAvatar(
+        maxRadius: 6,
+        backgroundColor: attent ? Colors.purple : Colors.grey,
       ),
     ],
   );

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 class Demande {
+  String id;
   String user;
   String dateDeComande;
   String categorie;
@@ -21,6 +22,7 @@ class Demande {
   double montont;
   bool valider;
   Demande({
+    this.id,
     this.user,
     this.dateDeComande,
     this.categorie,
@@ -44,6 +46,7 @@ class Demande {
 
   Map<String, dynamic> toMap() {
     return {
+      'ID': id,
       'User': user,
       'Date de comande': dateDeComande,
       'Categorie': categorie,
@@ -68,6 +71,7 @@ class Demande {
 
   factory Demande.fromMap(Map<String, dynamic> map) {
     return Demande(
+      id: map['ID'],
       user: map['User'],
       dateDeComande: map['Date de comande'],
       categorie: map['Categorie'],

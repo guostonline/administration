@@ -53,5 +53,13 @@ class Controller extends GetxController {
     demandeCMontageDemontage.value = mydemandeList.montageDemontage;
     demandeBesoinEmbalage.value = mydemandeList.besoiEmballage;
     demandeAvecFacture.value = mydemandeList.demnadeDeFacture;
+    numberSalon.value = mydemandeList.nombreDeSalon;
+    numberProduit.value = mydemandeList.quantite;
+    totlaPoids.value = mydemandeList.poids;
+  }
+
+ Future<Demande> getLastDemande() async {
+    return await demandesFiltrie[0];
+    
   }
 }

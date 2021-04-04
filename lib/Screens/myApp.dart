@@ -3,9 +3,10 @@ import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Screens/AddDemand.dart';
-import 'package:administration/Widgets/ClientInformations.dart';
+import 'package:administration/Widgets/InformationWidget/ClientInformations.dart';
 import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
 import 'package:administration/Widgets/LesClientsWidgets.dart';
+import 'package:administration/Widgets/SingleWidgets/HeaderWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,8 +21,6 @@ class MyApp extends StatefulWidget {
 Controller _controller = Get.put(Controller());
 
 class _MyAppState extends State<MyApp> {
-  List<User> users;
-  List<Demande> demandes;
   @override
   void initState() {
     super.initState();
@@ -37,7 +36,11 @@ class _MyAppState extends State<MyApp> {
       final List<Demande> alldemandes =
           snapshot.docs.map((e) => Demande.fromMap(e.data())).toList();
       _controller.demandes.assignAll(alldemandes);
+      _controller.demandes
+          .sort((a, b) => a.dateDeComande.compareTo(b.dateDeComande));
       _controller.demandesFiltrie.assignAll(alldemandes);
+      _controller.demandesFiltrie
+          .sort((a, b) => b.dateDeComande.compareTo(a.dateDeComande));
     });
   }
 
@@ -64,11 +67,13 @@ class _MyAppState extends State<MyApp> {
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              HeaderWidgets(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   DemandeCard(),
                   DemandInformations(),

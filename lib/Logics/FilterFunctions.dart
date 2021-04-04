@@ -1,5 +1,6 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'User.dart';
@@ -75,5 +76,12 @@ resetAllSwitcher() {
   _controller.filterOnAttends.value = false;
   _controller.filterRefusees.value = false;
   _controller.filterValidees.value = false;
+}
 
+Color statCircle({bool valider, bool vue, bool attent, bool refus}) {
+  if (vue) return Colors.green;
+  if (valider) return Colors.blue;
+  if (attent) return Colors.purple;
+  if (refus) return Colors.red;
+  return Colors.grey;
 }

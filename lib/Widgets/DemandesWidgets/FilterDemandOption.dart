@@ -18,7 +18,8 @@ class FilterDemandeOptions extends StatelessWidget {
           children: [
             Text("Déja vue "),
             FlutterSwitch(
-              height: 20,
+              activeColor: Colors.green,
+              height: 30,
               width: 45,
               value: _controller.filterDejaVue.value,
               onToggle: (value) {
@@ -31,7 +32,8 @@ class FilterDemandeOptions extends StatelessWidget {
             SizedBox(width: 8),
             Text("Valider "),
             FlutterSwitch(
-              height: 20,
+              activeColor: Colors.blue,
+              height: 30,
               width: 45,
               value: _controller.filterValidees.value,
               onToggle: (value) {
@@ -44,7 +46,8 @@ class FilterDemandeOptions extends StatelessWidget {
             SizedBox(width: 8),
             Text("En attente "),
             FlutterSwitch(
-              height: 20,
+              activeColor: Colors.purple,
+              height: 30,
               width: 45,
               value: _controller.filterOnAttends.value,
               onToggle: (value) {
@@ -57,7 +60,8 @@ class FilterDemandeOptions extends StatelessWidget {
             SizedBox(width: 8),
             Text("Refus "),
             FlutterSwitch(
-              height: 20,
+              activeColor: Colors.red,
+              height: 30,
               width: 45,
               value: _controller.filterRefusees.value,
               onToggle: (value) {
