@@ -3,9 +3,9 @@ import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Screens/AddDemand.dart';
-import 'package:administration/Widgets/InformationWidget/ClientInformations.dart';
+import 'package:administration/Widgets/ClientsWidgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
-import 'package:administration/Widgets/LesClientsWidgets.dart';
+import 'package:administration/Widgets/InformationWidget/ClientInformations.dart';
 import 'package:administration/Widgets/SingleWidgets/HeaderWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
           snapshot.docs.map((e) => Demande.fromMap(e.data())).toList();
       _controller.demandes.assignAll(alldemandes);
       _controller.demandes
-          .sort((a, b) => a.dateDeComande.compareTo(b.dateDeComande));
+          .sort((a, b) => b.dateDeComande.compareTo(a.dateDeComande));
       _controller.demandesFiltrie.assignAll(alldemandes);
       _controller.demandesFiltrie
           .sort((a, b) => b.dateDeComande.compareTo(a.dateDeComande));
@@ -46,51 +46,57 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          MaterialButton(
-              child: Text(
-                "Clients",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => Get.to(ClientsWidget())),
-          MaterialButton(
-              child: Text(
-                "Demandes",
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => Get.to(MyApp()))
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderWidgets(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  DemandeCard(),
-                  DemandInformations(),
-                ],
-              ),
-              SizedBox(height: 50),
-              // ClientsWidget()
-            ],
+    if (_controller.demandesFiltrie == null)
+      return Scaffold(
+          body: Center(
+        child: CircularProgressIndicator(),
+      ));
+    else
+      return Scaffold(
+        appBar: AppBar(
+          actions: [
+            MaterialButton(
+                child: Text(
+                  "Clients",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Get.to(ClientsWidget())),
+            MaterialButton(
+                child: Text(
+                  "Demandes",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Get.to(MyApp()))
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                HeaderWidgets(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    DemandeCard(),
+                    DemandInformations(),
+                  ],
+                ),
+                SizedBox(height: 50),
+                // ClientsWidget()
+              ],
+            ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(AddDemand());
-        },
-        child: Icon(Icons.add),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.to(AddDemand());
+          },
+          child: Icon(Icons.add),
+        ),
+      );
   }
 }

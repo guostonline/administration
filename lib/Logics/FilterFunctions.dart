@@ -1,7 +1,9 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
+import 'package:administration/Widgets/SingleWidgets/HeaderWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import 'User.dart';
 
@@ -69,6 +71,13 @@ filterByAttend(bool option) {
         .toList());
   else
     _controller.demandesFiltrie.assignAll(_controller.demandes);
+}
+
+List filterByThisDay(DateTime dateNow) {
+  var formattedDate = DateFormat('dd/MM/yyyy').format(dateNow);
+  return _controller.demandes
+      .where((demande) => demande.desLe == formattedDate)
+      .toList();
 }
 
 resetAllSwitcher() {

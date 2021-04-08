@@ -1,5 +1,6 @@
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
+import 'package:administration/Logics/TimesDateFunctions.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
@@ -8,6 +9,7 @@ class Controller extends GetxController {
   RxList myList = [].obs;
   RxList demandesFiltrie = [].obs;
   RxList demandes = [].obs;
+  RxList demandesDejour = [].obs;
   RxList userList = [].obs;
   RxList demandeList = [].obs;
   List<Demande> oneDemand = [];
@@ -36,30 +38,32 @@ class Controller extends GetxController {
   RxBool filterRefusees = false.obs;
   RxBool filterDejaVue = false.obs;
 
+  //add Demande
+  RxString addCategorie = "".obs;
+  RxString addDateDesLe = "".obs;
+  RxString addDateJusqua = "".obs;
+  RxString categorieImage = "images/demenagement.jpg".obs;
   RxBool isVisible = false.obs;
 
   void setDemande(Demande mydemandeList) {
     demandeCategorie.value = mydemandeList.categorie;
     demandeLocalite.value = mydemandeList.localite;
     demandeDestination.value = mydemandeList.destination;
-    demandeDesLe.value = mydemandeList.desLe;
-    demandeJusqua.value = mydemandeList.jusqua;
-    userId = mydemandeList.user;
-    userName.value = findUser(userId).name;
-    userEmail.value = findUser(userId).email;
-    userPhone.value = findUser(userId).numberPhone;
-    userPhotoUrl.value = findUser(userId).photoUrl;
+    demandeDesLe.value = convertDate(mydemandeList.desLe);
+    demandeJusqua.value = convertDate(mydemandeList.jusqua);
+    userEmail.value = findUser(mydemandeList.user).email;
+    userPhone.value = findUser(mydemandeList.user).numberPhone;
+    userPhotoUrl.value = findUser(mydemandeList.user).photoUrl;
     demandeChargeDecharge.value = mydemandeList.chargeDecharge;
     demandeCMontageDemontage.value = mydemandeList.montageDemontage;
     demandeBesoinEmbalage.value = mydemandeList.besoiEmballage;
     demandeAvecFacture.value = mydemandeList.demnadeDeFacture;
-    numberSalon.value = mydemandeList.nombreDeSalon;
-    numberProduit.value = mydemandeList.quantite;
-    totlaPoids.value = mydemandeList.poids;
+    numberSalon.value = mydemandeList.nombreDeSalon ?? "";
+    numberProduit.value = mydemandeList.quantite ?? "";
+    totlaPoids.value = mydemandeList.poids ?? "";
   }
 
- Future<Demande> getLastDemande() async {
+  Future<Demande> getLastDemande() async {
     return await demandesFiltrie[0];
-    
   }
 }

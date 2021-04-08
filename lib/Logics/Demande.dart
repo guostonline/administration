@@ -1,14 +1,16 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Demande {
   String id;
   String user;
-  String dateDeComande;
+  Timestamp dateDeComande;
   String categorie;
   String localite;
   String destination;
-  String desLe;
-  String jusqua;
+  Timestamp desLe;
+  Timestamp jusqua;
   bool chargeDecharge;
   bool montageDemontage;
   bool besoiEmballage;
