@@ -2,6 +2,7 @@ import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
+import 'package:administration/Logics/test.dart';
 import 'package:administration/Screens/AddDemand.dart';
 import 'package:administration/Widgets/ClientsWidgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
@@ -10,6 +11,7 @@ import 'package:administration/Widgets/SingleWidgets/HeaderWidgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:administration/Logics/FilterFunctions.dart';
 
 class MyApp extends StatefulWidget {
   MyApp({Key key}) : super(key: key);
@@ -86,6 +88,11 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 SizedBox(height: 50),
+                MaterialButton(
+                    child: Text("test"),
+                    onPressed: () {
+                      filterBythisDay();
+                    })
                 // ClientsWidget()
               ],
             ),

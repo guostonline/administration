@@ -1,10 +1,8 @@
-import 'package:administration/Logics/Controller.dart';
-import 'package:administration/Logics/Demande.dart';
-import 'package:administration/Widgets/SingleWidgets/HeaderWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import 'Controller.dart';
 import 'User.dart';
 
 Controller _controller = Get.put(Controller());
@@ -73,11 +71,21 @@ filterByAttend(bool option) {
     _controller.demandesFiltrie.assignAll(_controller.demandes);
 }
 
-List filterByThisDay(DateTime dateNow) {
-  var formattedDate = DateFormat('dd/MM/yyyy').format(dateNow);
-  return _controller.demandes
+List filterByThisDay(DateTime dateNow, List demande) {
+  String formattedDate = DateFormat('dd/MM/yyyy').format(dateNow);
+  return demande
       .where((demande) => demande.desLe == formattedDate)
       .toList();
+}
+
+List listOfDays(DateTime startDate, DateTime endDate) {
+  List<DateTime> days = [];
+  for (int i = 0; i <= endDate.difference(startDate).inDays; i++) {
+    days.add(startDate.add(Duration(days: i)));
+  }
+
+ 
+  return days;
 }
 
 resetAllSwitcher() {

@@ -116,18 +116,12 @@ class HeaderWidgets extends StatelessWidget {
                       height: 200,
                       width: 300,
                       child: ListView.builder(
-                          itemCount: filterByThisDay(dateNow).length,
-                          itemBuilder: (context, index) {
+                          itemCount: 3,
+                           itemBuilder: (BuildContext context, int index) { 
                             return ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: NetworkImage(findUser(
-                                        filterByThisDay(dateNow)[index].user)
-                                    .photoUrl),
-                              ),
-                              title:
-                                  Text(filterByThisDay(dateNow)[index].desLe),
+
                             );
-                          }),
+                           },),
                     )
                   ],
                 ),
