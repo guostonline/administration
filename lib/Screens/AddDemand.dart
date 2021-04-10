@@ -1,17 +1,13 @@
 import 'package:administration/Logics/Const.dart';
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Data/Ville.dart';
-import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/TimesDateFunctions.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 TextEditingController _ctrlLocalite;
 TextEditingController _ctrlDestination = TextEditingController();
-TextEditingController _ctrlDeLe;
-TextEditingController _ctrlJusqua;
 Controller _controller = Get.put(Controller());
 
 class AddDemand extends StatelessWidget {

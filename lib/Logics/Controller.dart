@@ -7,6 +7,9 @@ class Controller extends GetxController {
   // Demande demanad;
   RxList simpleList = [].obs;
   RxList myList = [].obs;
+  RxList listOfThisDay = [].obs;
+  RxList justAdded = [].obs;
+
   RxList demandesFiltrie = [].obs;
   RxList demandes = [].obs;
   RxList demandesDejour = [].obs;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+
 Controller _controller = Get.put(Controller());
 DateTime selectedDate = DateTime.now();
 String formattedDate;
@@ -37,4 +38,12 @@ String convertPickedToString(String date) {
   var test = DateFormat().parse(date);
 
   return DateFormat("dd/MM/yyyy").format(test);
+}
+
+extension TimeStampToString on Timestamp{
+String convertDate() {
+  return  formattedDate = DateFormat("dd/MM/yyyy").format(this.toDate());
+
+
+}
 }

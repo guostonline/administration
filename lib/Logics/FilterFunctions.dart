@@ -73,9 +73,7 @@ filterByAttend(bool option) {
 
 List filterByThisDay(DateTime dateNow, List demande) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(dateNow);
-  return demande
-      .where((demande) => demande.desLe == formattedDate)
-      .toList();
+  return demande.where((demande) => demande.desLe == formattedDate).toList();
 }
 
 List listOfDays(DateTime startDate, DateTime endDate) {
@@ -84,8 +82,46 @@ List listOfDays(DateTime startDate, DateTime endDate) {
     days.add(startDate.add(Duration(days: i)));
   }
 
- 
   return days;
+}
+
+bool compareDate(DateTime now, List myList) {
+  String formatedDate = DateFormat("yyyy/MM/dd").format(now);
+  bool test = myList.any(
+      (element) => DateFormat("yyyy/MM/dd").format(element) == formatedDate);
+  print(test);
+  return test;
+}
+
+bool compareDateDeDemande(DateTime timestamp) {
+  var date = DateFormat("yyyy/MM/dd").format(timestamp);
+  var dateNow = DateFormat("yyyy/MM/dd").format(DateTime.now());
+  if (date == dateNow) return true;
+  return false;
+}
+
+filterBythisDay() {
+  List numberDays = [];
+  List finalList = [];
+  for (int i = 0; i < _controller.demandes.length; i++) {
+    numberDays.addAll(listOfDays(_controller.demandes[i].desLe.toDate(),
+        _controller.demandes[i].jusqua.toDate()));
+    bool testIfTrue = compareDate(DateTime.now(), numberDays);
+    finalList.addIf(testIfTrue == true, _controller.demandes[i]);
+  }
+  print(finalList);
+  _controller.listOfThisDay.assignAll(finalList);
+}
+
+justAdded() {
+  List justAdded = [];
+  for (int i = 0; i < _controller.demandes.length; i++) {
+    justAdded.addIf(
+        compareDateDeDemande(_controller.demandes[i].dateDeComande.toDate()) ==
+            true,
+        _controller.demandes[i]);
+  }
+  _controller.justAdded.assignAll(justAdded);
 }
 
 resetAllSwitcher() {

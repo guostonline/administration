@@ -25,8 +25,8 @@ class HeaderWidgets extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(5),
-              width: 200,
-              height: 160,
+              width: 250,
+              height: 223,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.blue[600],
@@ -39,66 +39,77 @@ class HeaderWidgets extends StatelessWidget {
                 ],
               ),
               child: DefaultTextStyle(
-                style:
-                    GoogleFonts.robotoSlab(color: Colors.white, fontSize: 15),
-                child: InkWell(
-                  onTap: () {
-                    //_controller.setDemande(demande[index]);
-
-                    _controller.isVisible.value = true;
-                    _controller.setDemande(_controller.demandes[0]);
-                    _controller.userName.value =
-                        findUser(_controller.demandes[0].user).name;
-                  },
+                  style:
+                      GoogleFonts.robotoSlab(color: Colors.white, fontSize: 18),
                   child: Column(
                     children: [
-                      Text("Nouveau Demande",
-                          style: GoogleFonts.robotoSlab(
-                              color: Colors.yellow, fontSize: 20)),
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          AutoSizeText(_controller.demandes[0].localite),
-                          Flexible(child: Divider(color: Colors.white)),
-                          AutoSizeText(_controller.demandes[0].destination),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          AutoSizeText(
-                              convertDate(_controller.demandes[0].desLe)),
-                          Flexible(child: Divider(color: Colors.white)),
-                          AutoSizeText(
-                              convertDate(_controller.demandes[0].jusqua)),
-                        ],
-                      ),
-                      Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  findUser(_controller.demandes[0].user)
-                                      .photoUrl)),
-                          AutoSizeText(
-                              findUser(_controller.demandes[0].user).name),
-                        ],
+                      Text("New Demandes"),
+                      Container(
+                        height: 160,
+                        width: 250,
+                        child: ListView.builder(
+                            itemCount: _controller.justAdded.length,
+                            itemBuilder: (context, index) {
+                              return ListTile(
+                                leading: CircleAvatar(
+                                  backgroundImage: NetworkImage(findUser(
+                                          _controller.justAdded[index].user)
+                                      .photoUrl),
+                                ),
+                                title: DefaultTextStyle(
+                                  style: GoogleFonts.robotoSlab(
+                                      color: Colors.white, fontSize: 15),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(_controller
+                                          .justAdded[index].localite),
+                                      Flexible(
+                                          child: Divider(
+                                        color: Colors.white,
+                                        indent: 2,
+                                        endIndent: 2,
+                                      )),
+                                      Text(_controller
+                                          .justAdded[index].destination),
+                                    ],
+                                  ),
+                                ),
+                                subtitle: DefaultTextStyle(
+                                  style: GoogleFonts.robotoSlab(
+                                      color: Colors.white, fontSize: 10),
+                                  child: Row(
+                                    children: [
+                                      Text(convertDate(
+                                          _controller.justAdded[index].desLe)),
+                                      Flexible(
+                                          child: Divider(
+                                        color: Colors.white,
+                                        indent: 2,
+                                        endIndent: 2,
+                                      )),
+                                      Text(convertDate(
+                                          _controller.justAdded[index].jusqua)),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
                       ),
                     ],
-                  ),
-                ),
-              ),
+                  )),
             ),
             Container(
               padding: EdgeInsets.all(5),
-              width: 200,
-              height: 160,
+              width: 250,
+              height: 230,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.blue[600],
+                color: Colors.orange,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.blue[600],
+                    color: Colors.orange.shade200,
                     blurRadius: 20,
                     offset: Offset(8, 16), // Shadow position
                   ),
@@ -111,17 +122,37 @@ class HeaderWidgets extends StatelessWidget {
                   children: [
                     Text("Demandes d'aujourd'hui",
                         style: GoogleFonts.robotoSlab(
-                            color: Colors.yellow, fontSize: 20)),
+                            color: Colors.white, fontSize: 20)),
                     Container(
-                      height: 200,
-                      width: 300,
+                      width: 250,
+                      height: 160,
                       child: ListView.builder(
-                          itemCount: 3,
-                           itemBuilder: (BuildContext context, int index) { 
-                            return ListTile(
-
-                            );
-                           },),
+                        itemCount: _controller.listOfThisDay.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: DefaultTextStyle(
+                              style:
+                                  GoogleFonts.robotoSlab(color: Colors.white),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(_controller
+                                      .listOfThisDay[index].localite),
+                                  Flexible(
+                                      child: Divider(
+                                    color: Colors.white,
+                                    endIndent: 2,
+                                    indent: 2,
+                                  )),
+                                  Text(_controller
+                                      .listOfThisDay[index].destination),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     )
                   ],
                 ),
