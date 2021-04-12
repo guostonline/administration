@@ -6,6 +6,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 Controller _controller = Get.put(Controller());
 
@@ -17,7 +18,6 @@ class DemandInformations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _height = MediaQuery.of(context).size.height;
     return Obx(
       () => Visibility(
         visible: _controller.isVisible.value,
@@ -32,20 +32,17 @@ class DemandInformations extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(15),
                       topRight: Radius.circular(15)),
-                  border: Border.all(color: Colors.blue, width: 5)),
+                  border: Border.all(color: Colors.green[800], width: 5)),
               width: 400,
-              height: 460,
+              height: 480,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    // width: double.infinity,
-                    color: Colors.blue,
-                    child: Text("Informations de domande",
-                        style: GoogleFonts.abel(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("Informations ",
+                        style: GoogleFonts.robotoSlab(
+                            fontSize: 25, fontWeight: FontWeight.bold)),
                   ),
                   Flexible(
                     child: Container(

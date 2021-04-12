@@ -2,7 +2,7 @@ import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
-import 'package:administration/Screens/AddDemand.dart';
+import 'package:administration/Widgets/AddDemande/AddDemand.dart';
 import 'package:administration/Widgets/ClientsWidgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
 import 'package:administration/Widgets/InformationWidget/ClientInformations.dart';
@@ -80,17 +80,19 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HeaderWidgets(),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //mainAxisSize: MainAxisSize.max,
                   children: [
                     DemandeCard(),
                     DemandInformations(),
+                    Spacer(),
+                    HeaderWidgets(),
                   ],
                 ),
                 SizedBox(height: 50),
-                
+
                 // ClientsWidget()
               ],
             ),

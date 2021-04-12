@@ -14,9 +14,13 @@ class DemandeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(15),
+      // padding: EdgeInsets.all(15),
       width: 440,
       height: 730,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(15), topRight: Radius.circular(15)),
+          border: Border.all(color: Colors.blue, width: 5)),
       child: Obx(
         () => Card(
           margin: EdgeInsets.all(5),
@@ -27,7 +31,7 @@ class DemandeCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Les demandes",
-                    style: GoogleFonts.robotoSlab(fontSize: 25)),
+                    style: GoogleFonts.robotoSlab(fontSize: 25,fontWeight: FontWeight.bold)),
               ),
               TextField(
                   onChanged: (value) {

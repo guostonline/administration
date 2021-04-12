@@ -42,11 +42,24 @@ class Controller extends GetxController {
   RxBool filterDejaVue = false.obs;
 
   //add Demande
-  RxString addCategorie = "".obs;
+  RxString addCategorie = "Adeel Déménagement".obs;
   RxString addDateDesLe = "".obs;
   RxString addDateJusqua = "".obs;
+  RxString addLocalite = "".obs;
+  RxString addDestination = "".obs;
+  RxInt addNumberChambre = 0.obs;
+  RxInt addNumberProduit = 0.obs;
+  RxInt addTotalPoids = 0.obs;
+  RxBool addSwitchChargeDecharge = false.obs;
+  RxBool addSwitchMontageDemantage = false.obs;
+  RxBool addSwitchBesoinEmballage = false.obs;
+  RxBool addSwitchFacture = false.obs;
+  RxString addUserID = "".obs;
+  RxString addUserName = "Select un client".obs;
+  RxString addUserEmail = "".obs;
+
   RxString categorieImage = "images/demenagement.jpg".obs;
-  RxBool isVisible = false.obs;
+  RxBool isVisible = true.obs;
 
   void setDemande(Demande mydemandeList) {
     demandeCategorie.value = mydemandeList.categorie;
