@@ -1,6 +1,7 @@
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:administration/Logics/TimesDateFunctions.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class Controller extends GetxController {
@@ -57,7 +58,7 @@ class Controller extends GetxController {
   RxString addUserID = "".obs;
   RxString addUserName = "Select un client".obs;
   RxString addUserEmail = "".obs;
-
+  
   RxString categorieImage = "images/demenagement.jpg".obs;
   RxBool isVisible = true.obs;
 

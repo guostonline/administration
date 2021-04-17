@@ -2,6 +2,7 @@ import 'package:administration/Logics/Const.dart';
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Data/Ville.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
+import 'package:administration/Logics/FireStore.dart';
 import 'package:administration/Logics/TimesDateFunctions.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Widgets/AddDemande/Botton.dart';
@@ -12,10 +13,7 @@ import 'package:get/get.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 
 TextEditingController _ctrlLocalite;
-TextEditingController _ctrlDestination = TextEditingController();
-TextEditingController _ctrlNumberSalon = TextEditingController();
-TextEditingController _ctrlNumberProduit = TextEditingController();
-TextEditingController _ctrlTotalPoids = TextEditingController();
+TextEditingController _ctrlDestination;
 
 Controller _controller = Get.put(Controller());
 
@@ -72,7 +70,7 @@ class AddDemand extends StatelessWidget {
                     AutoCompleteTextField(
                       controller: _ctrlLocalite,
                       itemSubmitted: (item) {
-                        _ctrlLocalite.text = item;
+                        _controller.addLocalite.value = item;
                       },
                       key: null,
                       clearOnSubmit: false,
@@ -95,7 +93,7 @@ class AddDemand extends StatelessWidget {
                     AutoCompleteTextField(
                       controller: _ctrlDestination,
                       itemSubmitted: (item) {
-                        _ctrlDestination.text = item;
+                        _controller.addDestination.value = item;
                       },
                       key: null,
                       clearOnSubmit: false,
@@ -202,19 +200,9 @@ class AddDemand extends StatelessWidget {
                         color: Colors.blue,
                         controller: _controller.addSwitchFacture),
                     Divider(),
-                    MyTextFields(
-                        title: "Nomber de salons",
-                        controller: _ctrlNumberSalon),
-                    MyTextFields(
-                        title: "Nomber de produits",
-                        controller: _ctrlNumberProduit),
-                    MyTextFields(
-                      title: "Poids total",
-                      controller: _ctrlTotalPoids,
-                      suffix: "Kg",
-                    ),
+                    MyTextFields(),
                     SizedBox(height: 30),
-                    MyAddBotton()
+                    MyAddBotton(),
                   ],
                 ),
               ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
 Controller _controller = Get.put(Controller());
 DateTime selectedDate = DateTime.now();
 String formattedDate;
@@ -18,11 +17,11 @@ void selectDate(BuildContext context, {bool isJusqua = false}) async {
   );
   if (picked != null && picked != selectedDate) {
     if (!isJusqua) {
-      var test = DateFormat().format(picked);
-      _controller.addDateDesLe.value = test;
+      // var test = DateFormat("dd/MM/yyyy").format(picked);
+      _controller.addDateDesLe.value = picked.toString();
     } else if (isJusqua) {
-      var test = DateFormat().format(picked);
-      _controller.addDateJusqua.value = test;
+      //var test = DateFormat("dd/MM/yyyy").format(picked);
+      _controller.addDateJusqua.value = picked.toString();
     }
   }
 }
@@ -35,15 +34,14 @@ String convertDate(Timestamp date) {
 
 String convertPickedToString(String date) {
   if (date.isEmpty) return "";
-  var test = DateFormat().parse(date);
-
-  return DateFormat("dd/MM/yyyy").format(test);
+  DateTime dateTime = DateTime.tryParse(date);
+  var formatDate = DateFormat("dd/MM/yyyy").format(dateTime);
+  print(formatDate);
+  return formatDate;
 }
 
-extension TimeStampToString on Timestamp{
-String convertDate() {
-  return  formattedDate = DateFormat("dd/MM/yyyy").format(this.toDate());
-
-
-}
+extension TimeStampToString on Timestamp {
+  String convertDate() {
+    return formattedDate = DateFormat("dd/MM/yyyy").format(this.toDate());
+  }
 }

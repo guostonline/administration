@@ -1,9 +1,12 @@
+import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/FireStore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAddBotton extends StatelessWidget {
-  const MyAddBotton({Key key}) : super(key: key);
+  Controller _controller = Get.put(Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +18,17 @@ class MyAddBotton extends StatelessWidget {
         child: Row(
           children: [
             MaterialButton(
-                animationDuration: Duration(seconds: 1),
-                color: Colors.green[600],
-                elevation: 15,
-                hoverColor: Colors.blue,
-                child: Text("Ajouter",
-                    style: GoogleFonts.robotoSlab(color: Colors.white)),
-                onPressed: () {}),
+              animationDuration: Duration(seconds: 1),
+              color: Colors.green[600],
+              elevation: 15,
+              hoverColor: Colors.blue,
+              child: Text("Ajouter",
+                  style: GoogleFonts.robotoSlab(color: Colors.white)),
+              onPressed: () {
+                saveInformationToFireStore();
+                print(_controller.addDateDesLe.value);
+              },
+            )
           ],
         ),
       ),
