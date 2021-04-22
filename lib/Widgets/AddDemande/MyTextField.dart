@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyTextFields extends StatelessWidget {
-  Controller _controller = Get.put(Controller());
+  Controller _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,8 @@ class MyTextFields extends StatelessWidget {
                 height: 40,
                 child: TextField(
                   onChanged: (value) {
-                   if(value.isNum) _controller.addNumberProduit.value = int.parse(value);
+                    if (value.isNum)
+                      _controller.addNumberProduit.value = int.parse(value);
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -81,7 +82,8 @@ class MyTextFields extends StatelessWidget {
                 height: 40,
                 child: TextField(
                   onChanged: (value) {
-                   if(value.isNum) _controller.addTotalPoids.value = int.parse(value);
+                    if (value.isNum)
+                      _controller.addTotalPoids.value = int.parse(value);
                   },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(

@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 
 class _MyAppState extends State<MyApp> {
   @override
@@ -50,60 +50,54 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    if (_controller.demandesFiltrie == null)
-      return Scaffold(
-          body: Center(
-        child: CircularProgressIndicator(),
-      ));
-    else
-      return Scaffold(
-        appBar: AppBar(
-          actions: [
-            MaterialButton(
-                child: Text(
-                  "Clients",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () => Get.to(ClientsWidget())),
-            MaterialButton(
-                child: Text(
-                  "Demandes",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () => Get.to(MyApp()))
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //mainAxisSize: MainAxisSize.max,
-                  children: [
-                    DemandeCard(),
-                    DemandInformations(),
-                    Spacer(),
-                    HeaderWidgets(),
-                  ],
-                ),
-                SizedBox(height: 50),
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          MaterialButton(
+              child: Text(
+                "Clients",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => Get.to(ClientsWidget())),
+          MaterialButton(
+              child: Text(
+                "Demandes",
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () => Get.to(MyApp()))
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisSize: MainAxisSize.max,
+                children: [
+                  DemandeCard(),
+                  DemandInformations(),
+                  Spacer(),
+                  HeaderWidgets(),
+                ],
+              ),
+              SizedBox(height: 50),
 
-                // ClientsWidget()
-              ],
-            ),
+              // ClientsWidget()
+            ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.to(AddDemand());
-          },
-          child: Icon(Icons.add),
-        ),
-      );
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(AddDemand());
+        },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

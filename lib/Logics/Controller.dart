@@ -32,6 +32,10 @@ class Controller extends GetxController {
   RxBool demandeCMontageDemontage = false.obs;
   RxBool demandeBesoinEmbalage = false.obs;
   RxBool demandeAvecFacture = false.obs;
+  RxBool demandeValider = false.obs;
+  RxBool demandeRepondu = false.obs;
+  RxBool demandeVue = false.obs;
+  RxBool demandeRefus = false.obs;
 
   RxInt numberSalon = 0.obs;
   RxInt numberProduit = 0.obs;
@@ -58,11 +62,15 @@ class Controller extends GetxController {
   RxString addUserID = "".obs;
   RxString addUserName = "Select un client".obs;
   RxString addUserEmail = "".obs;
-  
+
   RxString categorieImage = "images/demenagement.jpg".obs;
   RxBool isVisible = true.obs;
 
   void setDemande(Demande mydemandeList) {
+    demandeValider.value = mydemandeList.valider;
+    demandeVue.value = mydemandeList.vue;
+    demandeRepondu.value = mydemandeList.repondu;
+    demandeRefus.value = mydemandeList.refus;
     demandeCategorie.value = mydemandeList.categorie;
     demandeLocalite.value = mydemandeList.localite;
     demandeDestination.value = mydemandeList.destination;
@@ -83,4 +91,13 @@ class Controller extends GetxController {
   Future<Demande> getLastDemande() async {
     return await demandesFiltrie[0];
   }
+
+@override
+  void onInit() {
+    super.onInit();
+    
+  }
+
+
 }
+

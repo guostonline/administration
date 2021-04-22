@@ -7,7 +7,7 @@ import 'package:administration/Logics/TimesDateFunctions.dart';
 import 'package:administration/Logics/User.dart';
 import 'package:administration/Widgets/AddDemande/Botton.dart';
 import 'package:administration/Widgets/AddDemande/MyTextField.dart';
-import 'package:administration/Widgets/AddDemande/SwitchWidgets.dart';
+import 'package:administration/Widgets/GlobaleWidgets/SwitchWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
@@ -15,7 +15,7 @@ import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 TextEditingController _ctrlLocalite;
 TextEditingController _ctrlDestination;
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 
 class AddDemand extends StatelessWidget {
   const AddDemand({Key key}) : super(key: key);
@@ -189,15 +189,15 @@ class AddDemand extends StatelessWidget {
                         controller: _controller.addSwitchChargeDecharge),
                     MySwitcher(
                         title: "Montage-Démontage",
-                        color: Colors.blue,
+                        color: Colors.green,
                         controller: _controller.addSwitchMontageDemantage),
                     MySwitcher(
                         title: "Besoin d'emballage",
-                        color: Colors.blue,
+                        color: Colors.purple,
                         controller: _controller.addSwitchBesoinEmballage),
                     MySwitcher(
                         title: "Demand de facture",
-                        color: Colors.blue,
+                        color: Colors.orange,
                         controller: _controller.addSwitchFacture),
                     Divider(),
                     MyTextFields(),

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 
 class DemandeCard extends StatelessWidget {
   @override
@@ -31,7 +31,8 @@ class DemandeCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text("Les demandes",
-                    style: GoogleFonts.robotoSlab(fontSize: 25,fontWeight: FontWeight.bold)),
+                    style: GoogleFonts.robotoSlab(
+                        fontSize: 25, fontWeight: FontWeight.bold)),
               ),
               TextField(
                   onChanged: (value) {
@@ -62,10 +63,7 @@ class DemandeCard extends StatelessWidget {
                       child: ListTile(
                         isThreeLine: true,
                         onTap: () {
-                          print(
-                              findUser(_controller.demandesFiltrie[index].user)
-                                  .name);
-                          _controller.isVisible.value = true;
+                         
                           _controller
                               .setDemande(_controller.demandesFiltrie[index]);
                           _controller.userName.value =

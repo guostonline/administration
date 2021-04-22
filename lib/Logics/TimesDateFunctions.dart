@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 DateTime selectedDate = DateTime.now();
 String formattedDate;
 DateTime picked;

@@ -19,17 +19,15 @@ class MySwitcher extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title),
-        Obx(
-          () => FlutterSwitch(
-            activeColor: color,
-            height: 30,
-            width: 45,
-            value: controller.value,
-            onToggle: (value) {
-              controller.value = value;
-             
-            },
-          ),
+        SizedBox(width: 5),
+        FlutterSwitch(
+          activeColor: color,
+          height: 30,
+          width: 45,
+          value: controller.value,
+          onToggle: (value) {
+            controller.value = value;
+          },
         ),
       ],
     );

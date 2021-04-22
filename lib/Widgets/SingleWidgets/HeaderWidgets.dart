@@ -2,12 +2,11 @@ import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:administration/Logics/TimesDateFunctions.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 DateTime dateNow = DateTime.now();
 
 class HeaderWidgets extends StatelessWidget {

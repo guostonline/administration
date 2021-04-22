@@ -5,7 +5,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 
 class FilterDemandeOptions extends StatelessWidget {
   @override

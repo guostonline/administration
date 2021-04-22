@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-Controller _controller = Get.put(Controller());
+Controller _controller = Get.find();
 
 class ClientsWidget extends StatelessWidget {
   @override

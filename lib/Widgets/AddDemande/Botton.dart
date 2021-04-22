@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAddBotton extends StatelessWidget {
-  Controller _controller = Get.put(Controller());
+  Controller _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
