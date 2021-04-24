@@ -58,12 +58,13 @@ class DemandeCard extends StatelessWidget {
                   itemCount: _controller.demandesFiltrie.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0)),
                       elevation: 10,
                       margin: EdgeInsets.all(15),
                       child: ListTile(
                         isThreeLine: true,
                         onTap: () {
-                         
                           _controller
                               .setDemande(_controller.demandesFiltrie[index]);
                           _controller.userName.value =
@@ -82,6 +83,15 @@ class DemandeCard extends StatelessWidget {
                         ),
                         leading: CircleAvatar(
                           child: CachedNetworkImage(
+                            imageBuilder: (context, imageProvider) => Container(
+                              width: 80.0,
+                              height: 80.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
+                              ),
+                            ),
                             imageUrl: findUser(
                                     _controller.demandesFiltrie[index].user)
                                 .photoUrl,

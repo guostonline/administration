@@ -19,6 +19,7 @@ class Controller extends GetxController {
   List<Demande> oneDemand = [];
 
   String userId = "";
+  String demandeID = "";
   RxString userName = "".obs;
   RxString userEmail = "".obs;
   RxString userPhone = "".obs;
@@ -67,6 +68,7 @@ class Controller extends GetxController {
   RxBool isVisible = true.obs;
 
   void setDemande(Demande mydemandeList) {
+    demandeID = mydemandeList.id;
     demandeValider.value = mydemandeList.valider;
     demandeVue.value = mydemandeList.vue;
     demandeRepondu.value = mydemandeList.repondu;
@@ -83,21 +85,10 @@ class Controller extends GetxController {
     demandeCMontageDemontage.value = mydemandeList.montageDemontage;
     demandeBesoinEmbalage.value = mydemandeList.besoiEmballage;
     demandeAvecFacture.value = mydemandeList.demnadeDeFacture;
-    numberSalon.value = mydemandeList.nombreDeSalon ?? "";
-    numberProduit.value = mydemandeList.quantite ?? "";
-    totlaPoids.value = mydemandeList.poids ?? "";
+    numberSalon.value = mydemandeList.nombreDeSalon ?? 0;
+    numberProduit.value = mydemandeList.quantite ?? 0;
+    totlaPoids.value = mydemandeList.poids ?? 0;
   }
 
-  Future<Demande> getLastDemande() async {
-    return await demandesFiltrie[0];
-  }
-
-@override
-  void onInit() {
-    super.onInit();
-    
-  }
-
-
+ 
 }
-

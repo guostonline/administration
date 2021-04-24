@@ -1,6 +1,7 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
+import 'package:administration/Logics/FireStore.dart';
 import 'package:administration/Widgets/InformationWidget/BottonWidget.dart';
 import 'package:administration/Widgets/InformationWidget/rowWidgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -35,7 +36,8 @@ class DemandInformations extends StatelessWidget {
                     topRight: Radius.circular(15)),
                 border: Border.all(color: Colors.green[800], width: 5)),
             width: 400,
-            height: 520,
+            height: 590,
+            padding: EdgeInsets.all(5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -145,11 +147,33 @@ class DemandInformations extends StatelessWidget {
                                 )
                               ],
                             ),
-                          )
+                          ),
                         ],
                       )),
                 ),
-                BottonInformation()
+                Divider(),
+                BottonInformation(),
+                Divider(),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.all(15),
+                        elevation: 15,
+                        shadowColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0))),
+                    onPressed: () {
+                      updateDataToFireStore(_controller.demandeID, {
+                        "Vue": _controller.demandeVue.value,
+                        "Repondu": _controller.demandeRepondu.value,
+                        "Refus": _controller.demandeRefus.value,
+                        "Valider": _controller.demandeValider.value
+                      });
+                    },
+                    child: Text("Valider"),
+                  ),
+                )
               ],
             ),
           ),

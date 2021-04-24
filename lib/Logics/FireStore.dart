@@ -31,3 +31,7 @@ saveInformationToFireStore() async {
         myDs.doc(value.id).update({"ID": value.id}),
       });
 }
+
+Future updateDataToFireStore(String doc, data) async {
+ await ds.collection("Demandes").doc(doc).update(data);
+}

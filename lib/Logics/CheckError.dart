@@ -1,7 +1,0 @@
-
-
-class CheckError{
-  isNoError(){
-    
-  }
-}

@@ -1,3 +1,4 @@
+import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,7 @@ class MySwitcher extends StatelessWidget {
           width: 45,
           value: controller.value,
           onToggle: (value) {
+            resetAllSwitcher();
             controller.value = value;
           },
         ),
