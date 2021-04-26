@@ -111,7 +111,6 @@ class AddDemand extends StatelessWidget {
                       itemFilter: (item, query) =>
                           item.toLowerCase().startsWith(query.toLowerCase()),
                     ),
-                    Divider(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -140,7 +139,6 @@ class AddDemand extends StatelessWidget {
                         )
                       ],
                     ),
-                    Divider(),
                     DropdownButton<dynamic>(
                       items: _controller.myList.map((dynamic value) {
                         return new DropdownMenuItem<dynamic>(
@@ -182,7 +180,6 @@ class AddDemand extends StatelessWidget {
                         print(_controller.addUserID.value);
                       },
                     ),
-                    Divider(),
                     MySwitcher(
                         title: "Chargement-Déchargement",
                         color: Colors.blue,

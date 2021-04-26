@@ -33,5 +33,9 @@ saveInformationToFireStore() async {
 }
 
 Future updateDataToFireStore(String doc, data) async {
- await ds.collection("Demandes").doc(doc).update(data);
+  await ds.collection("Demandes").doc(doc).update(data);
+}
+
+Future deleteDemandeFromFireStore(String docID) async {
+  await ds.collection('Demandes').doc(docID).delete();
 }

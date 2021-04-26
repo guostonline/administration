@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 Controller _controller = Get.find();
 
@@ -154,25 +155,67 @@ class DemandInformations extends StatelessWidget {
                 Divider(),
                 BottonInformation(),
                 Divider(),
-                Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(15),
-                        elevation: 15,
-                        shadowColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0))),
-                    onPressed: () {
-                      updateDataToFireStore(_controller.demandeID, {
-                        "Vue": _controller.demandeVue.value,
-                        "Repondu": _controller.demandeRepondu.value,
-                        "Refus": _controller.demandeRefus.value,
-                        "Valider": _controller.demandeValider.value
-                      });
-                    },
-                    child: Text("Valider"),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Visibility(
+                      visible: _controller.demandeID.isEmpty ? false : true,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(15),
+                            elevation: 15,
+                            shadowColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0))),
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            animType: AnimType.SCALE,
+                            body: Text("Sauver les modifications?"),
+                            dialogType: DialogType.QUESTION,
+                            width: 400,
+                            headerAnimationLoop: false,
+                            btnOkOnPress: () {
+                              updateDataToFireStore(_controller.demandeID, {
+                                "Vue": _controller.demandeVue.value,
+                                "Repondu": _controller.demandeRepondu.value,
+                                "Refus": _controller.demandeRefus.value,
+                                "Valider": _controller.demandeValider.value
+                              });
+                            },
+                            btnCancelOnPress: () {},
+                          )..show();
+                        },
+                        child: Text("Valider"),
+                      ),
+                    ),
+                    Visibility(
+                      visible: _controller.demandeID.isEmpty ? false : true,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(15),
+                            elevation: 15,
+                            shadowColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0))),
+                        onPressed: () {
+                          AwesomeDialog(
+                              context: context,
+                              body: Text("Vous les vous supprimé ce demande?"),
+                              dialogType: DialogType.QUESTION,
+                              headerAnimationLoop: false,
+                              btnOkOnPress: () {
+                                deleteDemandeFromFireStore(
+                                    _controller.demandeID);
+                              },
+                              btnCancelOnPress: () {},
+                              width: 400)
+                            ..show();
+                        },
+                        child: Text("Supprimé"),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),
