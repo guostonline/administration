@@ -1,8 +1,9 @@
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/FilterFunctions.dart';
 import 'package:administration/Logics/TimesDateFunctions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import 'User.dart';
 
 class Controller extends GetxController {
   // Demande demanad;
@@ -13,6 +14,7 @@ class Controller extends GetxController {
 
   RxList demandesFiltrie = [].obs;
   RxList demandes = [].obs;
+  RxList demandesByClient = [].obs;
   RxList demandesDejour = [].obs;
   RxList userList = [].obs;
   RxList demandeList = [].obs;
@@ -66,6 +68,13 @@ class Controller extends GetxController {
 
   RxString categorieImage = "images/demenagement.jpg".obs;
   RxBool isVisible = true.obs;
+  // Client informations
+  //
+  RxString clientID = "e8iwaBuh8ShOE4T2ybnSYF7DdyN2".obs;
+  RxString clientName = "".obs;
+  RxString clientEmail = "".obs;
+  RxString clientPhone = "".obs;
+  RxString clientPhoto = "".obs;
 
   void setDemande(Demande mydemandeList) {
     demandeID = mydemandeList.id;
@@ -90,5 +99,18 @@ class Controller extends GetxController {
     totlaPoids.value = mydemandeList.poids ?? 0;
   }
 
- 
+  void setClient(User user) {
+    clientID.value = user.id;
+    clientName.value = user.name;
+    clientEmail.value = user.email;
+    clientPhone.value = user.numberPhone;
+    clientPhoto.value = user.photoUrl;
+  }
+
+  void clearClient() {
+    userName.value = "";
+    userEmail.value = "";
+    userPhone.value = "";
+    userPhotoUrl.value = "";
+  }
 }

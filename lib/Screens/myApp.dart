@@ -2,6 +2,7 @@ import 'package:administration/Logics/Controller.dart';
 import 'package:administration/Logics/Demande.dart';
 import 'package:administration/Logics/GetDateFireBase.dart';
 import 'package:administration/Logics/User.dart';
+import 'package:administration/Screens/ContactPage.dart';
 import 'package:administration/Widgets/AddDemande/AddDemand.dart';
 import 'package:administration/Widgets/ClientsWidgets/LesClientsWidgets.dart';
 import 'package:administration/Widgets/DemandesWidgets/DemandeCard.dart';
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
       justAdded();
     });
     filterBythisDay();
+    
   }
 
   @override
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
                 "Clients",
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () => Get.to(ClientsWidget())),
+              onPressed: () => Get.to(ContactPage())),
           MaterialButton(
               child: Text(
                 "Demandes",
@@ -80,8 +82,11 @@ class _MyAppState extends State<MyApp> {
                 //mainAxisSize: MainAxisSize.max,
                 children: [
                   DemandeCard(),
+                  SizedBox(width: 80),
                   DemandInformations(),
-                  Spacer(),
+                  //Spacer(),
+                  SizedBox(width: 80),
+
                   HeaderWidgets(),
                 ],
               ),

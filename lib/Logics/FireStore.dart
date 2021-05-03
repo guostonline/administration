@@ -1,11 +1,10 @@
 import 'package:administration/Logics/Controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 Controller _controller = Get.find();
 FirebaseFirestore ds = FirebaseFirestore.instance;
-saveInformationToFireStore() async {
+Future saveInformationToFireStore() async {
   var myDs = ds.collection("Demandes");
   await myDs.add({
     "User": _controller.addUserID.value,

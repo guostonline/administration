@@ -71,6 +71,12 @@ filterByAttend(bool option) {
     _controller.demandesFiltrie.assignAll(_controller.demandes);
 }
 
+filterByClient() {
+  _controller.demandesByClient.assignAll(_controller.demandes
+      .where((demande) => demande.user == _controller.clientID.value)
+      .toList());
+}
+
 List filterByThisDay(DateTime dateNow, List demande) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(dateNow);
   return demande.where((demande) => demande.desLe == formattedDate).toList();

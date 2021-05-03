@@ -8,7 +8,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 Controller _controller = Get.find();
@@ -193,9 +192,10 @@ class DemandInformations extends StatelessWidget {
                       visible: _controller.demandeID.isEmpty ? false : true,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                            primary: Colors.red,
                             padding: EdgeInsets.all(15),
                             elevation: 15,
-                            shadowColor: Colors.blue,
+                            shadowColor: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0))),
                         onPressed: () {

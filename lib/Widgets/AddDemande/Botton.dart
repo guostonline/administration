@@ -1,13 +1,11 @@
-import 'package:administration/Logics/Controller.dart';
+import 'package:administration/Logics/ErrorHandl.dart';
 import 'package:administration/Logics/FireStore.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyAddBotton extends StatelessWidget {
-  Controller _controller = Get.find();
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,8 +23,28 @@ class MyAddBotton extends StatelessWidget {
               child: Text("Ajouter",
                   style: GoogleFonts.robotoSlab(color: Colors.white)),
               onPressed: () {
-                saveInformationToFireStore();
-                print(_controller.addDateDesLe.value);
+                if (allFieldsAreComplete()) {
+                  saveInformationToFireStore().then((_) => AwesomeDialog(
+                      context: context,
+                      body: Text("Le demande est bien enregistré"),
+                      dialogType: DialogType.SUCCES,
+                      //autoHide: Duration(seconds: 3),
+                      headerAnimationLoop: false,
+                      btnOkOnPress: () {},
+                      width: 400)
+                    ..show());
+                  
+                } else
+                  AwesomeDialog(
+                      context: context,
+                      body: Text("Remplire tout les obligatoire champ. SVP"),
+                      dialogType: DialogType.ERROR,
+                      //autoHide: Duration(seconds: 3),
+                      headerAnimationLoop: false,
+                      btnOkOnPress: () {},
+                      width: 400)
+                    ..show();
+                // print(_controller.addDateDesLe.value);
               },
             )
           ],
